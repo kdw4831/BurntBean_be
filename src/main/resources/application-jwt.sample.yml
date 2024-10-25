@@ -1,0 +1,10 @@
+token:
+  register-token:
+    secret: sadasd
+    expiration: 864000
+  access-token:
+    secret: asdsad
+    expiration: 3600
+  refresh-token:
+    secret: asdasd
+    expiration: 864000
