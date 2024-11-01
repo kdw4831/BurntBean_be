@@ -5,6 +5,7 @@ import com.burntbean.burntbean.config.properties.TokenPropertiesConfig;
 import com.burntbean.burntbean.security.authentication.SecurityContextManager;
 import com.burntbean.burntbean.token.model.BurntbeanJwt;
 import com.burntbean.burntbean.token.repository.RefreshTokenRepository;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
@@ -24,13 +25,26 @@ public class TokenServiceImpl implements TokenService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final SecurityContextManager securityContextManager;
 
+    private Integer accessExpiration;
+    private Integer refreshExpiration;
+
+
+
+    @PostConstruct
+    public void init(){
+        refreshExpiration= tokenPropertiesConfig.getRefreshToken().getExpiration();
+        accessExpiration = tokenPropertiesConfig.getAccessToken().getExpiration();
+    }
+
     @Override
     public void addCookieWithNewToken(HttpServletResponse response, String accessJws) {
         log.debug("newAccessJws: {}", accessJws);
         Cookie accessCookie = new Cookie("access-token", accessJws);
         accessCookie.setHttpOnly(true);
         accessCookie.setPath("/");
+        accessCookie.setMaxAge(refreshExpiration);
         response.addCookie(accessCookie);
+
 
     }
 
@@ -41,6 +55,7 @@ public class TokenServiceImpl implements TokenService {
         Cookie accessCookie = new Cookie("access-token", accessJws);
         accessCookie.setHttpOnly(true);
         accessCookie.setPath("/");
+        accessCookie.setMaxAge(accessExpiration);
         response.addCookie(accessCookie);
 
 
@@ -50,6 +65,7 @@ public class TokenServiceImpl implements TokenService {
         Cookie refreshCookie = new Cookie("refresh-token", refreshJws);
         refreshCookie.setHttpOnly(true);
         refreshCookie.setPath("/");
+        accessCookie.setMaxAge(refreshExpiration);
         response.addCookie(refreshCookie);
 
     }

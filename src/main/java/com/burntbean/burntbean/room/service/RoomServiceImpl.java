@@ -20,7 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -66,6 +69,43 @@ public class RoomServiceImpl implements RoomService {
             log.error("createRoom occured {}", e.getMessage());
             return false;
         }
+    }
+
+    @Transactional
+    @Override
+    public RoomDto getDmRoom(Long friendId) {
+
+        Long memberId = Long.parseLong(securityContextManager.getAuthenticatedUserName());
+        Optional<RoomEntity> room=roomRepository.existsRoomByFriendIdAndMyId(friendId,memberId);
+
+
+        if(room.isPresent()){
+         return RoomDto.toDto(room.get());
+        }else{
+            //uuid로 groupName 만들기 => 화상회의 할 때 그룹이름이 필수
+            String randomGroupName = UUID.randomUUID().toString();
+
+            //RoomEntity를 생성
+            RoomEntity dmRoom = new RoomEntity();
+            dmRoom.setRtype(Rtype.dm);
+            dmRoom.setTotal(2);
+            dmRoom.setGroupName(randomGroupName);
+            RoomEntity savedRoomEntity = roomRepository.save(dmRoom);
+
+            //나의 아이디를 roomMember에 저장
+            RoomMemberEntity roomMemberEntity = RoomMemberEntity.ToRoomMemberEntity(savedRoomEntity,memberId);
+            roomMemberRepository.save(roomMemberEntity);
+
+            //친구의 아이디를 roomMember에 저장
+            RoomMemberEntity roomMemberEntity2 = RoomMemberEntity.ToRoomMemberEntity(savedRoomEntity,friendId);
+            roomMemberRepository.save(roomMemberEntity2);
+
+
+
+            return RoomDto.toDto(savedRoomEntity);
+
+        }
+
     }
 
     /**
@@ -228,6 +268,19 @@ public class RoomServiceImpl implements RoomService {
             isSuccess = true;
         }
 
+        return isSuccess;
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteRoomRequest(Long roomId) {
+        boolean isSuccess = false;
+        Long memberId = Long.parseLong(securityContextManager.getAuthenticatedUserName());
+        // 특정 그룹 Id와 회원 ID를 기반으로 그룹 요청 entity를 삭제한다.
+        int deleteCount=roomRequestRepository.deleteByRoomRequestIdAndMemberId(roomId, memberId);
+        if(deleteCount>0){
+            isSuccess = true;
+        }
         return isSuccess;
     }
 }

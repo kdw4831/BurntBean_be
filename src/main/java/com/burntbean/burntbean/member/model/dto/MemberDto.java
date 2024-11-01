@@ -40,11 +40,17 @@ public class MemberDto {
     }
 
     public static String formattingFromCreateDate(MemberEntity memberEntity) {
+        if (memberEntity.getCreateAt() == null) {
+            return ""; // 또는 기본값으로 설정할 문자열
+        }
         LocalDateTime createAt = memberEntity.getCreateAt();
         return createAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     public static String formattingFromModifiedDate(MemberEntity memberEntity) {
+        if (memberEntity.getModifiedAt() == null) {
+            return ""; // 또는 기본값으로 설정할 문자열
+        }
         LocalDateTime modifiedAt = memberEntity.getModifiedAt();
         return modifiedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 

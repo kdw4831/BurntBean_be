@@ -13,4 +13,5 @@ public interface FriendRepository extends JpaRepository<FriendEntity,Long> {
     @Query("SELECT f FROM FriendEntity f JOIN FETCH f.friend WHERE f.me.id = :memberId")
     Optional<List<FriendEntity>> findListWithFriendByMemberId(@Param("memberId") Long memberId);
 
+
 }

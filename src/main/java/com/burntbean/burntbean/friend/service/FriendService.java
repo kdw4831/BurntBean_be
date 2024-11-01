@@ -13,4 +13,5 @@ public interface FriendService {
     List<MemberDto> getRequestFriendToMe();
     boolean deleteRequestAndJoinFriend(Long toMemberId);
     List<MemberDto> getFriends();
+    boolean deleteFriendRequest(Long toMemberId);
 }

@@ -21,4 +21,11 @@ public class NotificationController {
         messagingTemplate.convertAndSend("/queue/notification/" + userId, message);
         System.out.println("Sent invite notification to " + userId);
     }
+
+    @PostMapping("/send/friend/{userId}")
+    public void sendFriendInviteNotification(@PathVariable String userId, @RequestBody String message) {
+        // 특정 사용자의 queue로 메시지 전송
+        messagingTemplate.convertAndSend("/queue/notification/friend/" + userId, message);
+        System.out.println("Sent invite notification to " + userId);
+    }
 }

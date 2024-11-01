@@ -13,4 +13,6 @@ public interface MemberService {
     public Boolean findMemberNick(String nick);
     public List<String> searchNickListByRoomId(String nick , Long roomId);
     public Boolean deleteMember();
+    public List<MemberDto> getMembers();
+
 }

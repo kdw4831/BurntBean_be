@@ -60,4 +60,10 @@ public class MemberController {
         MemberDto memberDto= memberService.getMe();
         return ResponseEntity.ok().body(memberDto);
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<MemberDto>> getMemberList() {
+       List<MemberDto> memberList= memberService.getMembers();
+        return ResponseEntity.ok().body(memberList);
+    }
 }

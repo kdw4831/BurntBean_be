@@ -110,4 +110,13 @@ public class MemberServiceImpl implements MemberService{
         // 삭제로직은 천천히 찾아보기
         // 메세지기록은 남기는 느낌으로 갑시당
     }
+
+    @Override
+    public List<MemberDto> getMembers() {
+        List<MemberDto> members = memberRepository.findAll()
+                .stream()
+                .map((memberEntity) ->MemberDto.toDto(memberEntity))
+                .toList();
+        return members;
+    }
 }

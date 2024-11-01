@@ -16,7 +16,7 @@ public interface FriendRequestRepository extends JpaRepository<FriendRequestEnti
 
     @Modifying
     @Query("DELETE FROM FriendRequestEntity f WHERE f.fromMember.id = :fromMemberId AND f.toMember.id = :toMemberId")
-    void deleteByFriendRequestIdAndMemberId(@Param("fromMemberId") Long fromMemberId, @Param("toMemberId") Long toMemberId);
+    int deleteByFriendRequestIdAndMemberId(@Param("fromMemberId") Long fromMemberId, @Param("toMemberId") Long toMemberId);
 
     boolean existsByFromMemberIdAndToMemberId(Long fromMemberId, Long toMemberId);
 }

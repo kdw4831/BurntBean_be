@@ -130,4 +130,19 @@ public class FriendServiceImpl implements FriendService {
 
 
     }
+
+    @Transactional
+    @Override
+    public boolean deleteFriendRequest(Long toMemberId) {
+        boolean isSuccess= false;
+        Long memberId=Long.parseLong(securityContextManager.getAuthenticatedUserName());
+
+        //fromMemberId와 toMemberId로 친구 요청 entity를 삭제
+        int deleteCount=friendRequestRepository.deleteByFriendRequestIdAndMemberId(memberId,toMemberId);
+        if(deleteCount>0){
+            isSuccess= true;
+        }
+
+        return isSuccess;
+    }
 }

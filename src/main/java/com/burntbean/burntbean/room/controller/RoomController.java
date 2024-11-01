@@ -61,6 +61,21 @@ public class RoomController {
         return ResponseEntity.ok().body(roomDto);
     }
 
+
+    /**
+     * 친구를 클릭시에 room이 존재하면 그대로 가져오고
+     * 존재하지 않으면 친구와 나자신을 RoomMember에 저장하여
+     * room을 가져온다.
+     * @param friendId
+     * @return roomDto
+     */
+    @GetMapping("/detail/dm")
+    public ResponseEntity<RoomDto> getDmRooms(Long friendId) {
+        RoomDto roomDto = roomService.getDmRoom(friendId);
+        return ResponseEntity.ok().body(roomDto);
+    }
+
+
     /**
      *
      * @param roomId
@@ -95,4 +110,12 @@ public class RoomController {
 
         return ResponseEntity.ok(isSuccess);
     }
+
+   @DeleteMapping("/request/reject")
+    public ResponseEntity<Boolean> rejectRequest(@RequestParam Long roomId) {
+        boolean isSuccess =  roomService.deleteRoomRequest(roomId);
+        return ResponseEntity.ok(isSuccess);
+   }
+
+
 }

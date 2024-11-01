@@ -16,7 +16,7 @@ public interface RoomRequestRepository extends JpaRepository<RoomRequestEntity,L
 
     @Modifying
     @Query("DELETE FROM RoomRequestEntity r WHERE r.room.id = :roomId AND r.member.id = :memberId")
-    void deleteByRoomRequestIdAndMemberId(@Param("roomId") Long roomId, @Param("memberId") Long memberId);
+    int deleteByRoomRequestIdAndMemberId(@Param("roomId") Long roomId, @Param("memberId") Long memberId);
 
     boolean existsByRoomIdAndMemberId(Long groupId, Long memberId);
 }
