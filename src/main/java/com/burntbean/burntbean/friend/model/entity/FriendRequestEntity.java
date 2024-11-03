@@ -20,6 +20,6 @@ public class FriendRequestEntity {
     @JoinColumn(name = "from_id", foreignKey = @ForeignKey(name="member_from_id_request_fk"))
     private MemberEntity fromMember;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "to_id" , foreignKey = @ForeignKey(name="member_from_id_request_fk"))
+    @JoinColumn(name = "to_id" , foreignKey = @ForeignKey(name="member_to_id_request_fk"))
     private MemberEntity toMember;
 }

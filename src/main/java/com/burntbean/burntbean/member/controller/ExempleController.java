@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
 public class ExempleController {
-    @GetMapping("test")  //   localhost:9000/api/test
+    @GetMapping("/api/test")  //   localhost:9000/api/test
     public String test(){
         return "연결 성공";
     }
