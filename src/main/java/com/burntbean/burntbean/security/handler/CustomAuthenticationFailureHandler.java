@@ -15,6 +15,6 @@ import java.io.IOException;
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        response.sendRedirect("http://localhost:9000/api/login/fail");
+        response.sendRedirect("http://be.burntbean.site/api/login/fail");
     }
 }

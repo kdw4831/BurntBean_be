@@ -1,3 +1,9 @@
+#cors:
+#  allowed-origins:
+#    - http://localhost:3000
+
+
 cors:
   allowed-origins:
-    - http://localhost:3000
+    - https://burntbean.site
+    - https://be.burntbean.site

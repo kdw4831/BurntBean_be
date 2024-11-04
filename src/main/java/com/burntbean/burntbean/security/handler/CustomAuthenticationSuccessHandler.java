@@ -24,7 +24,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String email = (String) attributes.get("email");
         log.info("email is: {}",email);
 
-        response.sendRedirect("http://localhost:9000/api/login/success");
+        response.sendRedirect("https://be.burntbean.site/api/login/success");
 
 
     }
