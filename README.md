@@ -11,8 +11,10 @@ Flutter && SpringBoot 를 활용한 학교 커뮤니티 앱
 - **Language** : `Java`
 - **IDE**  : `IntelliJ`
 - **Framework** : `SpringBoot`
-- **DataBase** : `MySql`
+- **DataBase** : `MySql (AWS RDS 사용)`
 - **ORM** : `JPA`
+- **Cloud**: AWS (EC2, Route53)
+- **Video Conferencing**: Jitsi Meet
 
 
 ## ⭐️ 화면 구성
