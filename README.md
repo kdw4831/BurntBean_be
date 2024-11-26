@@ -21,4 +21,5 @@ React && SpringBoot && JitsiMeet 를 활용한 화상회의 플랫폼
 
 
 ## DB 아키텍처
+<img src="https://github.com/user-attachments/assets/b2ca6076-f34f-43f8-a62e-2d4c16adb489" alt="image" width="900">
 
