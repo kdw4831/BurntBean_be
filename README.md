@@ -1,6 +1,6 @@
 ##  :tv: 프로젝트 소개
 
-Flutter && SpringBoot 를 활용한 학교 커뮤니티 앱
+React && SpringBoot && JitsiMeet 를 활용한 화상회의 플랫폼
 
 ## :alarm_clock: 개발기간
 
